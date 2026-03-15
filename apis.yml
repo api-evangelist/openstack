@@ -1,0 +1,14 @@
+name: OpenStack
+description: Open source cloud computing platform for building and managing public
+  and private clouds, providing infrastructure as a service (IaaS) through a set of
+  interrelated services.
+url: https://www.openstack.org/
+tags:
+- Cloud Platform
+- Infrastructure As A Service
+- Open Source
+- Virtualization
+created: '2025'
+modified: '2025'
+apis: []
+common: []
