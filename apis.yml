@@ -1,14 +1,60 @@
+aid: openstack
 name: OpenStack
-description: Open source cloud computing platform for building and managing public
-  and private clouds, providing infrastructure as a service (IaaS) through a set of
-  interrelated services.
-url: https://www.openstack.org/
+description: >-
+  Open source cloud computing platform for building and managing public and
+  private clouds, providing infrastructure as a service (IaaS) through a set
+  of interrelated services including Compute (Nova), Object Storage (Swift),
+  Block Storage (Cinder), Networking (Neutron), and Identity (Keystone).
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Cloud Platform
-- Infrastructure As A Service
-- Open Source
-- Virtualization
-created: '2025'
-modified: '2025'
-apis: []
-common: []
+  - Cloud Platform
+  - Infrastructure As A Service
+  - Open Source
+  - Virtualization
+created: '2025-01-01'
+modified: '2026-03-16'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: openstack:openstack
+    name: OpenStack
+    description: >-
+      Open source cloud computing platform for building and managing public and
+      private clouds, providing infrastructure as a service (IaaS) through a set
+      of interrelated services including Compute (Nova), Object Storage (Swift),
+      Block Storage (Cinder), Networking (Neutron), and Identity (Keystone).
+    humanURL: https://docs.openstack.org/api-quick-start/
+    tags:
+      - Cloud Platform
+      - Infrastructure As A Service
+      - Open Source
+      - Virtualization
+    properties:
+      - type: Documentation
+        url: https://docs.openstack.org/api-quick-start/
+      - type: Documentation
+        url: https://docs.openstack.org/api-ref/
+common:
+  - url: https://www.openstack.org/
+    name: OpenStack
+    type: Website
+    description: 'null'
+  - url: https://docs.openstack.org/
+    name: Documentation
+    type: Portal
+    description: 'null'
+  - url: https://docs.openstack.org/api-ref/
+    name: API Reference
+    type: Documentation
+    description: 'null'
+  - url: https://github.com/openstack
+    name: GitHub Organization
+    type: GitHubOrganization
+    description: 'null'
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
