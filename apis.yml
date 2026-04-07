@@ -11,7 +11,7 @@ access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Cloud Platform
-  - Infrastructure As A Service
+  - Infrastructure as a Service
   - Open Source
   - Virtualization
 created: '2025-01-01'
@@ -30,7 +30,7 @@ apis:
     humanURL: https://docs.openstack.org/api-quick-start/
     tags:
       - Cloud Platform
-      - Infrastructure As A Service
+      - Infrastructure as a Service
       - Open Source
       - Virtualization
     properties:
