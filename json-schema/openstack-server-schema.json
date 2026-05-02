@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/json-schema/openstack-server-schema.json",
+  "title": "OpenStack Nova Server",
+  "description": "Schema describing a Nova compute server (instance) returned by the OpenStack Compute API.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE", "BUILD", "DELETED", "ERROR", "HARD_REBOOT", "MIGRATING",
+        "PASSWORD", "PAUSED", "REBOOT", "REBUILD", "RESCUE", "RESIZE",
+        "REVERT_RESIZE", "SHELVED", "SHELVED_OFFLOADED", "SHUTOFF",
+        "SOFT_DELETED", "SUSPENDED", "UNKNOWN", "VERIFY_RESIZE"
+      ]
+    },
+    "tenant_id": { "type": "string" },
+    "user_id": { "type": "string" },
+    "flavor": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "links": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "image": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "links": { "type": "array", "items": { "type": "object" } }
+          }
+        },
+        { "type": "string" }
+      ]
+    },
+    "addresses": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "addr": { "type": "string" },
+            "version": { "type": "integer", "enum": [4, 6] },
+            "OS-EXT-IPS:type": { "type": "string", "enum": ["fixed", "floating"] },
+            "OS-EXT-IPS-MAC:mac_addr": { "type": "string" }
+          }
+        }
+      }
+    },
+    "key_name": { "type": "string" },
+    "security_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "name": { "type": "string" } }
+      }
+    },
+    "metadata": { "type": "object", "additionalProperties": { "type": "string" } },
+    "created": { "type": "string", "format": "date-time" },
+    "updated": { "type": "string", "format": "date-time" },
+    "OS-EXT-STS:vm_state": { "type": "string" },
+    "OS-EXT-STS:task_state": { "type": ["string", "null"] },
+    "OS-EXT-STS:power_state": { "type": "integer" },
+    "OS-EXT-AZ:availability_zone": { "type": "string" },
+    "hostId": { "type": "string" },
+    "progress": { "type": "integer" },
+    "links": { "type": "array", "items": { "type": "object" } }
+  },
+  "required": ["id", "name", "status"]
+}

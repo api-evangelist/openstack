@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: OpenStack Compute (Nova) API
+  description: >-
+    Nova is the OpenStack Compute service that manages the lifecycle of
+    compute instances (virtual machines, bare-metal, containers) in an
+    OpenStack cloud. The Nova API exposes endpoints for servers, flavors,
+    images, key pairs, security groups, attached volumes, and server
+    actions such as start, stop, reboot, resize, rebuild, and snapshot.
+  version: '2.1'
+  contact:
+    name: OpenStack Nova
+    url: https://docs.openstack.org/nova/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Nova Compute API reference
+  url: https://docs.openstack.org/api-ref/compute/
+servers:
+  - url: https://{nova-host}/compute/v2.1
+    description: Nova Compute API endpoint (deployment specific)
+    variables:
+      nova-host:
+        default: compute.example.com
+security:
+  - TokenAuth: []
+tags:
+  - name: Versions
+    description: API version discovery.
+  - name: Servers
+    description: Compute instance management.
+  - name: Flavors
+    description: Compute instance flavors.
+  - name: Images
+    description: Image references.
+  - name: Keypairs
+    description: SSH key pair management.
+  - name: Server Actions
+    description: Lifecycle actions on servers.
+paths:
+  /:
+    get:
+      operationId: listVersions
+      summary: List API versions
+      tags: [Versions]
+      security: []
+      responses:
+        '200':
+          description: Supported API versions.
+  /servers:
+    get:
+      operationId: listServers
+      summary: List servers
+      tags: [Servers]
+      responses:
+        '200':
+          description: List of servers (summaries).
+    post:
+      operationId: createServer
+      summary: Create server
+      tags: [Servers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateServerRequest'
+      responses:
+        '202':
+          description: Server creation accepted.
+  /servers/detail:
+    get:
+      operationId: listServersDetail
+      summary: List servers (detailed)
+      tags: [Servers]
+      responses:
+        '200':
+          description: Detailed list of servers.
+  /servers/{server_id}:
+    parameters:
+      - name: server_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getServer
+      summary: Get server
+      tags: [Servers]
+      responses:
+        '200':
+          description: Server detail.
+    put:
+      operationId: updateServer
+      summary: Update server
+      tags: [Servers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Server updated.
+    delete:
+      operationId: deleteServer
+      summary: Delete server
+      tags: [Servers]
+      responses:
+        '204':
+          description: Server deleted.
+  /servers/{server_id}/action:
+    parameters:
+      - name: server_id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: serverAction
+      summary: Perform an action on a server
+      description: >-
+        Body is a single-key object naming the action - e.g. os-start,
+        os-stop, reboot, resize, rebuild, createImage, confirmResize,
+        revertResize, pause, unpause, suspend, resume, lock, unlock,
+        rescue, unrescue, shelve, unshelve, migrate, evacuate.
+      tags: [Server Actions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '202':
+          description: Action accepted.
+  /flavors:
+    get:
+      operationId: listFlavors
+      summary: List flavors
+      tags: [Flavors]
+      responses:
+        '200':
+          description: List of flavors.
+  /flavors/detail:
+    get:
+      operationId: listFlavorsDetail
+      summary: List flavors (detailed)
+      tags: [Flavors]
+      responses:
+        '200':
+          description: Detailed list of flavors.
+  /flavors/{flavor_id}:
+    parameters:
+      - name: flavor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getFlavor
+      summary: Get flavor
+      tags: [Flavors]
+      responses:
+        '200':
+          description: Flavor detail.
+  /images:
+    get:
+      operationId: listImagesProxy
+      summary: List images (proxied to Glance)
+      tags: [Images]
+      deprecated: true
+      responses:
+        '200':
+          description: List of images.
+  /os-keypairs:
+    get:
+      operationId: listKeypairs
+      summary: List key pairs
+      tags: [Keypairs]
+      responses:
+        '200':
+          description: List of key pairs.
+    post:
+      operationId: createKeypair
+      summary: Create or import key pair
+      tags: [Keypairs]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keypair:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    public_key:
+                      type: string
+                    type:
+                      type: string
+                      enum: [ssh, x509]
+      responses:
+        '200':
+          description: Key pair created.
+  /os-keypairs/{name}:
+    parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getKeypair
+      summary: Get key pair
+      tags: [Keypairs]
+      responses:
+        '200':
+          description: Key pair detail.
+    delete:
+      operationId: deleteKeypair
+      summary: Delete key pair
+      tags: [Keypairs]
+      responses:
+        '202':
+          description: Key pair deletion accepted.
+components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+  schemas:
+    CreateServerRequest:
+      type: object
+      required: [server]
+      properties:
+        server:
+          type: object
+          required: [name, flavorRef]
+          properties:
+            name:
+              type: string
+            imageRef:
+              type: string
+            flavorRef:
+              type: string
+            networks:
+              type: array
+              items:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                  port:
+                    type: string
+            block_device_mapping_v2:
+              type: array
+              items:
+                type: object
+            security_groups:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+            key_name:
+              type: string
+            user_data:
+              type: string
+            metadata:
+              type: object
+              additionalProperties:
+                type: string
+            availability_zone:
+              type: string
