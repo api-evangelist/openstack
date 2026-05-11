@@ -243,6 +243,16 @@ common:
   - url: https://www.openstack.org/foundation/
     name: Open Infrastructure Foundation
     type: Organization
+  - type: Integrations
+    url: https://www.openstack.org/marketplace
+integrations:
+  - name: Training
+  - name: Distros & Appliances
+  - name: Public Clouds
+  - name: Hosted Private Clouds
+  - name: Remotely Managed Private Clouds
+  - name: Consulting & Integrators
+  - name: Drivers
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
