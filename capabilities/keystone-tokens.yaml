@@ -1,0 +1,184 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OpenStack Identity (Keystone) API v3 — Tokens
+  description: 'OpenStack Identity (Keystone) API v3 — Tokens. 4 operations. Lead operation: Issue an authentication token.
+    Self-contained Naftiko capability covering one Openstack business surface.'
+  tags:
+  - Openstack
+  - Tokens
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OPENSTACK_API_KEY: OPENSTACK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: keystone-tokens
+    baseUri: https://{keystone-host}:5000/v3
+    description: OpenStack Identity (Keystone) API v3 — Tokens business capability. Self-contained, no shared references.
+    resources:
+    - name: auth-tokens
+      path: /auth/tokens
+      operations:
+      - name: issuetoken
+        method: POST
+        description: Issue an authentication token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: validatetoken
+        method: GET
+        description: Validate token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Subject-Token
+          in: header
+          type: string
+          required: true
+      - name: checktoken
+        method: HEAD
+        description: Check token (no body)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Subject-Token
+          in: header
+          type: string
+          required: true
+      - name: revoketoken
+        method: DELETE
+        description: Revoke token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Subject-Token
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.OPENSTACK_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: keystone-tokens-rest
+    port: 8080
+    description: REST adapter for OpenStack Identity (Keystone) API v3 — Tokens. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/auth/tokens
+      name: auth-tokens
+      description: REST surface for auth-tokens.
+      operations:
+      - method: POST
+        name: issuetoken
+        description: Issue an authentication token
+        call: keystone-tokens.issuetoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: validatetoken
+        description: Validate token
+        call: keystone-tokens.validatetoken
+        with:
+          X-Subject-Token: rest.X-Subject-Token
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: checktoken
+        description: Check token (no body)
+        call: keystone-tokens.checktoken
+        with:
+          X-Subject-Token: rest.X-Subject-Token
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: revoketoken
+        description: Revoke token
+        call: keystone-tokens.revoketoken
+        with:
+          X-Subject-Token: rest.X-Subject-Token
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: keystone-tokens-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OpenStack Identity (Keystone) API v3 — Tokens. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: issue-authentication-token
+      description: Issue an authentication token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: keystone-tokens.issuetoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate-token
+      description: Validate token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: keystone-tokens.validatetoken
+      with:
+        X-Subject-Token: tools.X-Subject-Token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-token-no-body
+      description: Check token (no body)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: keystone-tokens.checktoken
+      with:
+        X-Subject-Token: tools.X-Subject-Token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revoke-token
+      description: Revoke token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: keystone-tokens.revoketoken
+      with:
+        X-Subject-Token: tools.X-Subject-Token
+      outputParameters:
+      - type: object
+        mapping: $.

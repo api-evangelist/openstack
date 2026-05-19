@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OpenStack Compute (Nova) API — Versions
+  description: 'OpenStack Compute (Nova) API — Versions. 1 operations. Lead operation: List API versions. Self-contained Naftiko
+    capability covering one Openstack business surface.'
+  tags:
+  - Openstack
+  - Versions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OPENSTACK_API_KEY: OPENSTACK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: nova-versions
+    baseUri: https://{nova-host}/compute/v2.1
+    description: OpenStack Compute (Nova) API — Versions business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: listversions
+        method: GET
+        description: List API versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.OPENSTACK_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: nova-versions-rest
+    port: 8080
+    description: REST adapter for OpenStack Compute (Nova) API — Versions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: listversions
+        description: List API versions
+        call: nova-versions.listversions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: nova-versions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OpenStack Compute (Nova) API — Versions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-api-versions
+      description: List API versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nova-versions.listversions
+      outputParameters:
+      - type: object
+        mapping: $.

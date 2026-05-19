@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OpenStack Compute (Nova) API — Keypairs
+  description: 'OpenStack Compute (Nova) API — Keypairs. 4 operations. Lead operation: List key pairs. Self-contained Naftiko
+    capability covering one Openstack business surface.'
+  tags:
+  - Openstack
+  - Keypairs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OPENSTACK_API_KEY: OPENSTACK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: nova-keypairs
+    baseUri: https://{nova-host}/compute/v2.1
+    description: OpenStack Compute (Nova) API — Keypairs business capability. Self-contained, no shared references.
+    resources:
+    - name: os-keypairs
+      path: /os-keypairs
+      operations:
+      - name: listkeypairs
+        method: GET
+        description: List key pairs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createkeypair
+        method: POST
+        description: Create or import key pair
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: os-keypairs-name
+      path: /os-keypairs/{name}
+      operations:
+      - name: getkeypair
+        method: GET
+        description: Get key pair
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletekeypair
+        method: DELETE
+        description: Delete key pair
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.OPENSTACK_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: nova-keypairs-rest
+    port: 8080
+    description: REST adapter for OpenStack Compute (Nova) API — Keypairs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/os-keypairs
+      name: os-keypairs
+      description: REST surface for os-keypairs.
+      operations:
+      - method: GET
+        name: listkeypairs
+        description: List key pairs
+        call: nova-keypairs.listkeypairs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createkeypair
+        description: Create or import key pair
+        call: nova-keypairs.createkeypair
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/os-keypairs/{name}
+      name: os-keypairs-name
+      description: REST surface for os-keypairs-name.
+      operations:
+      - method: GET
+        name: getkeypair
+        description: Get key pair
+        call: nova-keypairs.getkeypair
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletekeypair
+        description: Delete key pair
+        call: nova-keypairs.deletekeypair
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: nova-keypairs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OpenStack Compute (Nova) API — Keypairs. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-key-pairs
+      description: List key pairs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nova-keypairs.listkeypairs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-import-key-pair
+      description: Create or import key pair
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nova-keypairs.createkeypair
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-key-pair
+      description: Get key pair
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nova-keypairs.getkeypair
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-key-pair
+      description: Delete key pair
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: nova-keypairs.deletekeypair
+      outputParameters:
+      - type: object
+        mapping: $.

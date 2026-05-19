@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OpenStack Compute (Nova) API — Server Actions
+  description: 'OpenStack Compute (Nova) API — Server Actions. 1 operations. Lead operation: Perform an action on a server.
+    Self-contained Naftiko capability covering one Openstack business surface.'
+  tags:
+  - Openstack
+  - Server Actions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OPENSTACK_API_KEY: OPENSTACK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: nova-server-actions
+    baseUri: https://{nova-host}/compute/v2.1
+    description: OpenStack Compute (Nova) API — Server Actions business capability. Self-contained, no shared references.
+    resources:
+    - name: servers-server_id-action
+      path: /servers/{server_id}/action
+      operations:
+      - name: serveraction
+        method: POST
+        description: Perform an action on a server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.OPENSTACK_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: nova-server-actions-rest
+    port: 8080
+    description: REST adapter for OpenStack Compute (Nova) API — Server Actions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/servers/{server-id}/action
+      name: servers-server-id-action
+      description: REST surface for servers-server_id-action.
+      operations:
+      - method: POST
+        name: serveraction
+        description: Perform an action on a server
+        call: nova-server-actions.serveraction
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: nova-server-actions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OpenStack Compute (Nova) API — Server Actions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: perform-action-server
+      description: Perform an action on a server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nova-server-actions.serveraction
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

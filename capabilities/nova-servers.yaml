@@ -1,0 +1,231 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OpenStack Compute (Nova) API — Servers
+  description: 'OpenStack Compute (Nova) API — Servers. 6 operations. Lead operation: List servers. Self-contained Naftiko
+    capability covering one Openstack business surface.'
+  tags:
+  - Openstack
+  - Servers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OPENSTACK_API_KEY: OPENSTACK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: nova-servers
+    baseUri: https://{nova-host}/compute/v2.1
+    description: OpenStack Compute (Nova) API — Servers business capability. Self-contained, no shared references.
+    resources:
+    - name: servers
+      path: /servers
+      operations:
+      - name: listservers
+        method: GET
+        description: List servers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createserver
+        method: POST
+        description: Create server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: servers-detail
+      path: /servers/detail
+      operations:
+      - name: listserversdetail
+        method: GET
+        description: List servers (detailed)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: servers-server_id
+      path: /servers/{server_id}
+      operations:
+      - name: getserver
+        method: GET
+        description: Get server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateserver
+        method: PUT
+        description: Update server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteserver
+        method: DELETE
+        description: Delete server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.OPENSTACK_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: nova-servers-rest
+    port: 8080
+    description: REST adapter for OpenStack Compute (Nova) API — Servers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/servers
+      name: servers
+      description: REST surface for servers.
+      operations:
+      - method: GET
+        name: listservers
+        description: List servers
+        call: nova-servers.listservers
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createserver
+        description: Create server
+        call: nova-servers.createserver
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/servers/detail
+      name: servers-detail
+      description: REST surface for servers-detail.
+      operations:
+      - method: GET
+        name: listserversdetail
+        description: List servers (detailed)
+        call: nova-servers.listserversdetail
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/servers/{server-id}
+      name: servers-server-id
+      description: REST surface for servers-server_id.
+      operations:
+      - method: GET
+        name: getserver
+        description: Get server
+        call: nova-servers.getserver
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateserver
+        description: Update server
+        call: nova-servers.updateserver
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteserver
+        description: Delete server
+        call: nova-servers.deleteserver
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: nova-servers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OpenStack Compute (Nova) API — Servers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-servers
+      description: List servers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nova-servers.listservers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-server
+      description: Create server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nova-servers.createserver
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-servers-detailed
+      description: List servers (detailed)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nova-servers.listserversdetail
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-server
+      description: Get server
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nova-servers.getserver
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-server
+      description: Update server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nova-servers.updateserver
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-server
+      description: Delete server
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: nova-servers.deleteserver
+      outputParameters:
+      - type: object
+        mapping: $.
