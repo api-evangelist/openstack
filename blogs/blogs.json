@@ -2,12 +2,20 @@
   "repo": "openstack",
   "feeds": [
     {
+      "source": "https://www.openstack.org/blog/feed/",
+      "feed_url": "https://www.openstack.org/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://www.openstack.org/blog/",
       "feed_url": "https://www.openstack.org/blog/feed/",
-      "title": "OpenStack Blog | Open Infrastructure Foundation",
-      "saved": 2
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
   "post_count": 13,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
