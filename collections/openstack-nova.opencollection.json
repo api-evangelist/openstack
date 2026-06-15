@@ -1,0 +1,307 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenStack Compute (Nova) API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth-Token",
+      "value": "{{X-Auth-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/"
+          },
+          "docs": "List API versions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/servers"
+          },
+          "docs": "List servers"
+        },
+        {
+          "info": {
+            "name": "Create server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{nova-host}/compute/v2.1/servers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create server"
+        },
+        {
+          "info": {
+            "name": "List servers (detailed)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/servers/detail"
+          },
+          "docs": "List servers (detailed)"
+        },
+        {
+          "info": {
+            "name": "Get server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/servers/:server_id",
+            "params": [
+              {
+                "name": "server_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get server"
+        },
+        {
+          "info": {
+            "name": "Update server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{nova-host}/compute/v2.1/servers/:server_id",
+            "params": [
+              {
+                "name": "server_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update server"
+        },
+        {
+          "info": {
+            "name": "Delete server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{nova-host}/compute/v2.1/servers/:server_id",
+            "params": [
+              {
+                "name": "server_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete server"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform an action on a server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{nova-host}/compute/v2.1/servers/:server_id/action",
+            "params": [
+              {
+                "name": "server_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Body is a single-key object naming the action - e.g. os-start, os-stop, reboot, resize, rebuild, createImage, confirmResize, revertResize, pause, unpause, suspend, resume, lock, unlock, rescue, unrescue, shelve, unshelve, migrate, evacuate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Flavors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List flavors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/flavors"
+          },
+          "docs": "List flavors"
+        },
+        {
+          "info": {
+            "name": "List flavors (detailed)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/flavors/detail"
+          },
+          "docs": "List flavors (detailed)"
+        },
+        {
+          "info": {
+            "name": "Get flavor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/flavors/:flavor_id",
+            "params": [
+              {
+                "name": "flavor_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get flavor"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List images (proxied to Glance)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/images"
+          },
+          "docs": "List images (proxied to Glance)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Keypairs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List key pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/os-keypairs"
+          },
+          "docs": "List key pairs"
+        },
+        {
+          "info": {
+            "name": "Create or import key pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{nova-host}/compute/v2.1/os-keypairs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or import key pair"
+        },
+        {
+          "info": {
+            "name": "Get key pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{nova-host}/compute/v2.1/os-keypairs/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get key pair"
+        },
+        {
+          "info": {
+            "name": "Delete key pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{nova-host}/compute/v2.1/os-keypairs/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete key pair"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
