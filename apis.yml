@@ -194,6 +194,10 @@ apis:
       - type: Documentation
         url: https://docs.openstack.org/trove/
 common:
+  - type: DomainSecurity
+    url: security/openstack-domain-security.yml
+  - type: Authentication
+    url: authentication/openstack-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/openstack
   - url: https://www.openstack.org/

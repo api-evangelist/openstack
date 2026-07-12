@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openstack-keystone-openapi.yml, openapi/openstack-nova-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: TokenAuth
+  type: apiKey
+  in: header
+  parameter: X-Auth-Token
+  sources:
+  - openapi/openstack-keystone-openapi.yml
+  - openapi/openstack-nova-openapi.yml
