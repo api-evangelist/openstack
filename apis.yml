@@ -194,6 +194,8 @@ apis:
       - type: Documentation
         url: https://docs.openstack.org/trove/
 common:
+  - type: AgenticAccess
+    url: agentic-access/openstack-agentic-access.yml
   - type: DomainSecurity
     url: security/openstack-domain-security.yml
   - type: Authentication
