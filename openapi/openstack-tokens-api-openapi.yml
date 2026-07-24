@@ -1,0 +1,188 @@
+openapi: 3.1.0
+info:
+  title: OpenStack Identity (Keystone) API v3 Domains Tokens API
+  description: Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.
+  version: '3'
+  contact:
+    name: OpenStack Identity (Keystone)
+    url: https://docs.openstack.org/keystone/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://{keystone-host}:5000/v3
+  description: Keystone Identity API v3 endpoint (deployment specific)
+  variables:
+    keystone-host:
+      default: keystone.example.com
+security:
+- TokenAuth: []
+tags:
+- name: Tokens
+  description: Issue and validate authentication tokens.
+paths:
+  /auth/tokens:
+    post:
+      operationId: issueToken
+      summary: Issue an authentication token
+      description: Authenticate using credentials (password, application credential, or token) and receive a scoped or unscoped token in the X-Subject-Token response header along with a service catalog body.
+      tags:
+      - Tokens
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '201':
+          description: Token issued.
+          headers:
+            X-Subject-Token:
+              schema:
+                type: string
+              description: The issued token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+    get:
+      operationId: validateToken
+      summary: Validate token
+      tags:
+      - Tokens
+      parameters:
+      - name: X-Subject-Token
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Token is valid.
+    head:
+      operationId: checkToken
+      summary: Check token (no body)
+      tags:
+      - Tokens
+      parameters:
+      - name: X-Subject-Token
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Token is valid.
+    delete:
+      operationId: revokeToken
+      summary: Revoke token
+      tags:
+      - Tokens
+      parameters:
+      - name: X-Subject-Token
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Token revoked.
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        enabled:
+          type: boolean
+        domain_id:
+          type: string
+        default_project_id:
+          type: string
+        description:
+          type: string
+        password_expires_at:
+          type: string
+          format: date-time
+    Token:
+      type: object
+      properties:
+        token:
+          type: object
+          properties:
+            methods:
+              type: array
+              items:
+                type: string
+            user:
+              $ref: '#/components/schemas/User'
+            project:
+              type: object
+            domain:
+              type: object
+            roles:
+              type: array
+              items:
+                type: object
+            catalog:
+              type: array
+              items:
+                type: object
+            expires_at:
+              type: string
+              format: date-time
+            issued_at:
+              type: string
+              format: date-time
+    AuthRequest:
+      type: object
+      properties:
+        auth:
+          type: object
+          properties:
+            identity:
+              type: object
+              properties:
+                methods:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - password
+                    - token
+                    - application_credential
+                password:
+                  type: object
+                token:
+                  type: object
+                application_credential:
+                  type: object
+            scope:
+              oneOf:
+              - type: object
+                properties:
+                  project:
+                    type: object
+              - type: object
+                properties:
+                  domain:
+                    type: object
+              - type: string
+                enum:
+                - unscoped
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+externalDocs:
+  description: Keystone v3 API reference
+  url: https://docs.openstack.org/api-ref/identity/v3/

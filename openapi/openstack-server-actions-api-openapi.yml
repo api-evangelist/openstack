@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: OpenStack Identity (Keystone) API v3 Domains Server Actions API
+  description: Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.
+  version: '3'
+  contact:
+    name: OpenStack Identity (Keystone)
+    url: https://docs.openstack.org/keystone/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://{keystone-host}:5000/v3
+  description: Keystone Identity API v3 endpoint (deployment specific)
+  variables:
+    keystone-host:
+      default: keystone.example.com
+security:
+- TokenAuth: []
+tags:
+- name: Server Actions
+  description: Lifecycle actions on servers.
+paths:
+  /servers/{server_id}/action:
+    parameters:
+    - name: server_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: serverAction
+      summary: Perform an action on a server
+      description: Body is a single-key object naming the action - e.g. os-start, os-stop, reboot, resize, rebuild, createImage, confirmResize, revertResize, pause, unpause, suspend, resume, lock, unlock, rescue, unrescue, shelve, unshelve, migrate, evacuate.
+      tags:
+      - Server Actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '202':
+          description: Action accepted.
+components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+externalDocs:
+  description: Keystone v3 API reference
+  url: https://docs.openstack.org/api-ref/identity/v3/

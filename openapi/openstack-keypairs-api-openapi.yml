@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: OpenStack Identity (Keystone) API v3 Domains Keypairs API
+  description: Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.
+  version: '3'
+  contact:
+    name: OpenStack Identity (Keystone)
+    url: https://docs.openstack.org/keystone/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://{keystone-host}:5000/v3
+  description: Keystone Identity API v3 endpoint (deployment specific)
+  variables:
+    keystone-host:
+      default: keystone.example.com
+security:
+- TokenAuth: []
+tags:
+- name: Keypairs
+  description: SSH key pair management.
+paths:
+  /os-keypairs:
+    get:
+      operationId: listKeypairs
+      summary: List key pairs
+      tags:
+      - Keypairs
+      responses:
+        '200':
+          description: List of key pairs.
+    post:
+      operationId: createKeypair
+      summary: Create or import key pair
+      tags:
+      - Keypairs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keypair:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    public_key:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - ssh
+                      - x509
+      responses:
+        '200':
+          description: Key pair created.
+  /os-keypairs/{name}:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getKeypair
+      summary: Get key pair
+      tags:
+      - Keypairs
+      responses:
+        '200':
+          description: Key pair detail.
+    delete:
+      operationId: deleteKeypair
+      summary: Delete key pair
+      tags:
+      - Keypairs
+      responses:
+        '202':
+          description: Key pair deletion accepted.
+components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+externalDocs:
+  description: Keystone v3 API reference
+  url: https://docs.openstack.org/api-ref/identity/v3/

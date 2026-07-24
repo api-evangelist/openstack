@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: OpenStack Identity (Keystone) API v3 Domains Users API
+  description: Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.
+  version: '3'
+  contact:
+    name: OpenStack Identity (Keystone)
+    url: https://docs.openstack.org/keystone/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://{keystone-host}:5000/v3
+  description: Keystone Identity API v3 endpoint (deployment specific)
+  variables:
+    keystone-host:
+      default: keystone.example.com
+security:
+- TokenAuth: []
+tags:
+- name: Users
+  description: User management.
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: List of users.
+    post:
+      operationId: createUser
+      summary: Create user
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created.
+  /users/{user_id}:
+    parameters:
+    - name: user_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getUser
+      summary: Get user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: User detail.
+    patch:
+      operationId: updateUser
+      summary: Update user
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: User updated.
+    delete:
+      operationId: deleteUser
+      summary: Delete user
+      tags:
+      - Users
+      responses:
+        '204':
+          description: User deleted.
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        enabled:
+          type: boolean
+        domain_id:
+          type: string
+        default_project_id:
+          type: string
+        description:
+          type: string
+        password_expires_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+externalDocs:
+  description: Keystone v3 API reference
+  url: https://docs.openstack.org/api-ref/identity/v3/

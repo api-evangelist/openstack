@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: OpenStack Identity (Keystone) API v3 Domains Servers API
+  description: Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.
+  version: '3'
+  contact:
+    name: OpenStack Identity (Keystone)
+    url: https://docs.openstack.org/keystone/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://{keystone-host}:5000/v3
+  description: Keystone Identity API v3 endpoint (deployment specific)
+  variables:
+    keystone-host:
+      default: keystone.example.com
+security:
+- TokenAuth: []
+tags:
+- name: Servers
+  description: Compute instance management.
+paths:
+  /servers:
+    get:
+      operationId: listServers
+      summary: List servers
+      tags:
+      - Servers
+      responses:
+        '200':
+          description: List of servers (summaries).
+    post:
+      operationId: createServer
+      summary: Create server
+      tags:
+      - Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateServerRequest'
+      responses:
+        '202':
+          description: Server creation accepted.
+  /servers/detail:
+    get:
+      operationId: listServersDetail
+      summary: List servers (detailed)
+      tags:
+      - Servers
+      responses:
+        '200':
+          description: Detailed list of servers.
+  /servers/{server_id}:
+    parameters:
+    - name: server_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getServer
+      summary: Get server
+      tags:
+      - Servers
+      responses:
+        '200':
+          description: Server detail.
+    put:
+      operationId: updateServer
+      summary: Update server
+      tags:
+      - Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Server updated.
+    delete:
+      operationId: deleteServer
+      summary: Delete server
+      tags:
+      - Servers
+      responses:
+        '204':
+          description: Server deleted.
+components:
+  schemas:
+    CreateServerRequest:
+      type: object
+      required:
+      - server
+      properties:
+        server:
+          type: object
+          required:
+          - name
+          - flavorRef
+          properties:
+            name:
+              type: string
+            imageRef:
+              type: string
+            flavorRef:
+              type: string
+            networks:
+              type: array
+              items:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                  port:
+                    type: string
+            block_device_mapping_v2:
+              type: array
+              items:
+                type: object
+            security_groups:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+            key_name:
+              type: string
+            user_data:
+              type: string
+            metadata:
+              type: object
+              additionalProperties:
+                type: string
+            availability_zone:
+              type: string
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+externalDocs:
+  description: Keystone v3 API reference
+  url: https://docs.openstack.org/api-ref/identity/v3/
