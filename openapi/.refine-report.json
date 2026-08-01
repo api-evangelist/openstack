@@ -1,0 +1,40 @@
+{
+  "provider": "openstack",
+  "sources": [
+    "openstack-domains-api-openapi.yml",
+    "openstack-endpoints-api-openapi.yml",
+    "openstack-flavors-api-openapi.yml",
+    "openstack-groups-api-openapi.yml",
+    "openstack-images-api-openapi.yml",
+    "openstack-keypairs-api-openapi.yml",
+    "openstack-projects-api-openapi.yml",
+    "openstack-roles-api-openapi.yml",
+    "openstack-server-actions-api-openapi.yml",
+    "openstack-servers-api-openapi.yml",
+    "openstack-services-api-openapi.yml",
+    "openstack-tokens-api-openapi.yml",
+    "openstack-users-api-openapi.yml",
+    "openstack-versions-api-openapi.yml"
+  ],
+  "outputs": [
+    "openstack-domains-api-openapi.yml",
+    "openstack-endpoints-api-openapi.yml",
+    "openstack-flavors-api-openapi.yml",
+    "openstack-groups-api-openapi.yml",
+    "openstack-images-api-openapi.yml",
+    "openstack-keypairs-api-openapi.yml",
+    "openstack-projects-api-openapi.yml",
+    "openstack-roles-api-openapi.yml",
+    "openstack-server-actions-api-openapi.yml",
+    "openstack-servers-api-openapi.yml",
+    "openstack-services-api-openapi.yml",
+    "openstack-tokens-api-openapi.yml",
+    "openstack-users-api-openapi.yml",
+    "openstack-versions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
