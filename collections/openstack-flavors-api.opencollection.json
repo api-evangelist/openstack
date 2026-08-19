@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenStack Identity (Keystone) API v3 Domains Flavors API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth-Token",
+      "value": "{{X-Auth-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flavors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List flavors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{keystone-host}:5000/v3/flavors"
+          },
+          "docs": "List flavors"
+        },
+        {
+          "info": {
+            "name": "List flavors (detailed)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{keystone-host}:5000/v3/flavors/detail"
+          },
+          "docs": "List flavors (detailed)"
+        },
+        {
+          "info": {
+            "name": "Get flavor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{keystone-host}:5000/v3/flavors/:flavor_id",
+            "params": [
+              {
+                "name": "flavor_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get flavor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

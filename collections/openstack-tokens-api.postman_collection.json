@@ -1,0 +1,488 @@
+{
+  "item": [
+    {
+      "id": "0fe84ddd-5c69-4169-a2eb-e725f033d8c0",
+      "name": "Tokens",
+      "description": {
+        "content": "Issue and validate authentication tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8431033f-302b-450d-9903-a7cd455b54a6",
+          "name": "Issue an authentication token",
+          "request": {
+            "name": "Issue an authentication token",
+            "description": {
+              "content": "Authenticate using credentials (password, application credential, or token) and receive a scoped or unscoped token in the X-Subject-Token response header along with a service catalog body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{keystone-host}}",
+                  "key": "keystone-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"password\": \"<object>\",\n      \"token\": \"<object>\",\n      \"application_credential\": \"<object>\"\n    },\n    \"scope\": {\n      \"project\": \"<object>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccb23f15-a68e-4a59-b3a1-43c7c7cb23aa",
+              "name": "Token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{keystone-host}}",
+                      "key": "keystone-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Auth-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"password\": \"<object>\",\n      \"token\": \"<object>\",\n      \"application_credential\": \"<object>\"\n    },\n    \"scope\": {\n      \"project\": \"<object>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The issued token.",
+                  "key": "X-Subject-Token",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": {\n    \"methods\": [\n      \"string\",\n      \"string\"\n    ],\n    \"user\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"Ere--S08bx@dIfsONdQGBTMfaiqEnd.xn\",\n      \"enabled\": false,\n      \"domain_id\": \"string\",\n      \"default_project_id\": \"string\",\n      \"description\": \"string\",\n      \"password_expires_at\": \"1978-07-05T02:53:31.371Z\"\n    },\n    \"project\": {},\n    \"domain\": {},\n    \"expires_at\": \"2020-05-18T14:02:37.812Z\",\n    \"issued_at\": \"1975-10-28T14:21:02.511Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77813f72-8e8a-4d1d-a112-ff596fe20fdb",
+          "name": "Validate token",
+          "request": {
+            "name": "Validate token",
+            "description": {},
+            "url": {
+              "path": [
+                "auth",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{keystone-host}}",
+                  "key": "keystone-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Subject-Token",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b33c599-29bc-467e-8ed4-b464628dd022",
+              "name": "Token is valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{keystone-host}}",
+                      "key": "keystone-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Auth-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Subject-Token",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39600d41-d4bb-4f71-8bfe-52d45fe68b7d",
+          "name": "Check token (no body)",
+          "request": {
+            "name": "Check token (no body)",
+            "description": {},
+            "url": {
+              "path": [
+                "auth",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{keystone-host}}",
+                  "key": "keystone-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Subject-Token",
+                "value": "<string>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40f50d5f-f249-4dda-b6f5-3e8d143ff809",
+              "name": "Token is valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{keystone-host}}",
+                      "key": "keystone-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Auth-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Subject-Token",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52a6edd7-b7b5-40d3-bf3d-8a815e7c85e0",
+          "name": "Revoke token",
+          "request": {
+            "name": "Revoke token",
+            "description": {},
+            "url": {
+              "path": [
+                "auth",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{keystone-host}}",
+                  "key": "keystone-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Subject-Token",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fb37e3e-8c51-4a47-9b0e-9292cabffec1",
+              "name": "Token revoked.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{keystone-host}}",
+                      "key": "keystone-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Auth-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Subject-Token",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "keystone.example.com",
+      "key": "keystone-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{keystone-host}}:5000/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Auth-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "658d54f1-b68a-42d4-bc28-f00ed0a9fec7",
+    "name": "OpenStack Identity (Keystone) API v3 Domains Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.\n\nContact Support:\n Name: OpenStack Identity (Keystone)",
+      "type": "text/plain"
+    }
+  }
+}

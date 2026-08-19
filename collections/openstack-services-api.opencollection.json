@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenStack Identity (Keystone) API v3 Domains Services API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth-Token",
+      "value": "{{X-Auth-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List services in catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{keystone-host}:5000/v3/services"
+          },
+          "docs": "List services in catalog"
+        },
+        {
+          "info": {
+            "name": "Create service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{keystone-host}:5000/v3/services",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create service"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

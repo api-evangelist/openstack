@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenStack Identity (Keystone) API v3 Domains Tokens API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth-Token",
+      "value": "{{X-Auth-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{keystone-host}:5000/v3/auth/tokens",
+            "headers": [
+              {
+                "name": "X-Subject-Token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate token"
+        },
+        {
+          "info": {
+            "name": "Issue an authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{keystone-host}:5000/v3/auth/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate using credentials (password, application credential, or token) and receive a scoped or unscoped token in the X-Subject-Token response header along with a service catalog body."
+        },
+        {
+          "info": {
+            "name": "Revoke token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{keystone-host}:5000/v3/auth/tokens",
+            "headers": [
+              {
+                "name": "X-Subject-Token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Revoke token"
+        },
+        {
+          "info": {
+            "name": "Check token (no body)",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://{keystone-host}:5000/v3/auth/tokens",
+            "headers": [
+              {
+                "name": "X-Subject-Token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Check token (no body)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

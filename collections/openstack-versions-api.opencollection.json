@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenStack Identity (Keystone) API v3 Domains Versions API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth-Token",
+      "value": "{{X-Auth-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{keystone-host}:5000/v3/"
+          },
+          "docs": "List API versions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

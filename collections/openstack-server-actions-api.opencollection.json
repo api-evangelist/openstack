@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenStack Identity (Keystone) API v3 Domains Server Actions API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth-Token",
+      "value": "{{X-Auth-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform an action on a server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{keystone-host}:5000/v3/servers/:server_id/action",
+            "params": [
+              {
+                "name": "server_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Body is a single-key object naming the action - e.g. os-start, os-stop, reboot, resize, rebuild, createImage, confirmResize, revertResize, pause, unpause, suspend, resume, lock, unlock, rescue, unrescue, shelve, unshelve, migrate, evacuate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
