@@ -25,6 +25,12 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/openstack.png
 tags:
   - Cloud Platform
+  - Infrastructure-as-a-Service
+  - Open-Source
+  - Virtualization
+  - Linux Foundation
+tags_raw:
+  - Cloud Platform
   - Infrastructure as a Service
   - Open Source
   - Virtualization
@@ -92,6 +98,9 @@ apis:
   humanURL: https://docs.openstack.org/api-ref/image/
   baseURL: https://{glance-host}/image/v2
   tags:
+  - Image
+  - Disk Images
+  tags_raw:
   - Images
   - Disk Images
   properties:
@@ -154,6 +163,9 @@ apis:
   baseURL: https://{trove-host}/database/v1.0
   tags:
   - Database
+  - Database-as-a-Service
+  tags_raw:
+  - Database
   - DBaaS
   properties:
   - type: Documentation
@@ -189,7 +201,8 @@ apis:
   description: Service endpoint URLs per region and interface.
   humanURL: https://docs.openstack.org/api-ref/identity/v3/
   baseURL: https://{keystone-host}:5000/v3
-  tags:
+  tags: []
+  tags_raw:
   - Endpoints
   properties:
   - type: OpenAPI
@@ -238,6 +251,8 @@ apis:
   humanURL: https://docs.openstack.org/api-ref/identity/v3/
   baseURL: https://{keystone-host}:5000/v3
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -262,6 +277,8 @@ apis:
   humanURL: https://docs.openstack.org/api-ref/identity/v3/
   baseURL: https://{keystone-host}:5000/v3
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -310,6 +327,8 @@ apis:
   humanURL: https://docs.openstack.org/api-ref/identity/v3/
   baseURL: https://{keystone-host}:5000/v3
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -454,6 +473,8 @@ apis:
   humanURL: https://docs.openstack.org/api-ref/identity/v3/
   baseURL: https://{keystone-host}:5000/v3
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
