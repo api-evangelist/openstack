@@ -1,40 +1,47 @@
 {
   "provider": "openstack",
   "sources": [
-    "openstack-domains-api-openapi.yml",
-    "openstack-endpoints-api-openapi.yml",
-    "openstack-flavors-api-openapi.yml",
-    "openstack-groups-api-openapi.yml",
-    "openstack-images-api-openapi.yml",
-    "openstack-keypairs-api-openapi.yml",
-    "openstack-projects-api-openapi.yml",
-    "openstack-roles-api-openapi.yml",
-    "openstack-server-actions-api-openapi.yml",
-    "openstack-servers-api-openapi.yml",
-    "openstack-services-api-openapi.yml",
-    "openstack-tokens-api-openapi.yml",
-    "openstack-users-api-openapi.yml",
-    "openstack-versions-api-openapi.yml"
+    "_original/openstack-keystone-openapi.yml",
+    "_original/openstack-nova-openapi.yml"
   ],
   "outputs": [
     "openstack-domains-api-openapi.yml",
     "openstack-endpoints-api-openapi.yml",
-    "openstack-flavors-api-openapi.yml",
     "openstack-groups-api-openapi.yml",
-    "openstack-images-api-openapi.yml",
-    "openstack-keypairs-api-openapi.yml",
     "openstack-projects-api-openapi.yml",
     "openstack-roles-api-openapi.yml",
-    "openstack-server-actions-api-openapi.yml",
-    "openstack-servers-api-openapi.yml",
     "openstack-services-api-openapi.yml",
     "openstack-tokens-api-openapi.yml",
     "openstack-users-api-openapi.yml",
+    "openstack-flavors-api-openapi.yml",
+    "openstack-images-api-openapi.yml",
+    "openstack-keypairs-api-openapi.yml",
+    "openstack-server-actions-api-openapi.yml",
+    "openstack-servers-api-openapi.yml",
     "openstack-versions-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openstack-keystone-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "openstack-nova-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "openstack-domains-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-flavors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-keypairs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-server-actions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-servers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-services-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openstack-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
