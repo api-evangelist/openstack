@@ -7,6 +7,20 @@ description: >-
   DNS (Designate), and Load Balancer (Octavia). Each service exposes its own REST API; clients authenticate against
   Keystone and use the returned service catalog to discover per-region endpoints for the remaining services.
 type: Index
+deliveryModel:
+  model: saas
+  license: Apache 2.0 License
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
