@@ -39,7 +39,7 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/openstack.png
 tags:
   - Cloud Platform
-  - Infrastructure as a Service
+  - Infrastructure-as-a-Service
   - Open-Source
   - Virtualization
   - Linux Foundation
@@ -177,7 +177,7 @@ apis:
   baseURL: https://{trove-host}/database/v1.0
   tags:
   - Database
-  - DBaaS
+  - Database-as-a-Service
   tags_raw:
   - Database
   - DBaaS
