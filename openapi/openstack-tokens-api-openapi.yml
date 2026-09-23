@@ -91,36 +91,6 @@ paths:
           description: Token revoked.
 components:
   schemas:
-    Token:
-      type: object
-      properties:
-        token:
-          type: object
-          properties:
-            methods:
-              type: array
-              items:
-                type: string
-            user:
-              $ref: '#/components/schemas/User'
-            project:
-              type: object
-            domain:
-              type: object
-            roles:
-              type: array
-              items:
-                type: object
-            catalog:
-              type: array
-              items:
-                type: object
-            expires_at:
-              type: string
-              format: date-time
-            issued_at:
-              type: string
-              format: date-time
     AuthRequest:
       type: object
       properties:
@@ -157,6 +127,36 @@ components:
               - type: string
                 enum:
                 - unscoped
+    Token:
+      type: object
+      properties:
+        token:
+          type: object
+          properties:
+            methods:
+              type: array
+              items:
+                type: string
+            user:
+              $ref: '#/components/schemas/User'
+            project:
+              type: object
+            domain:
+              type: object
+            roles:
+              type: array
+              items:
+                type: object
+            catalog:
+              type: array
+              items:
+                type: object
+            expires_at:
+              type: string
+              format: date-time
+            issued_at:
+              type: string
+              format: date-time
     User:
       type: object
       properties:
