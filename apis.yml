@@ -42,7 +42,7 @@ tags:
   - OpenStack
   - Cloud Platform
   - Infrastructure-as-a-Service
-  - Open-Source
+  - Open Source
   - Virtualization
   - Linux Foundation
 tags_raw:
@@ -52,6 +52,7 @@ tags_raw:
   - Open Source
   - Virtualization
   - Linux Foundation
+  - Open-Source
 created: '2025-01-01'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/apis.yml
