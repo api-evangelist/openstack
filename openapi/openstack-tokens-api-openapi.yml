@@ -127,27 +127,6 @@ components:
               - type: string
                 enum:
                 - unscoped
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        enabled:
-          type: boolean
-        domain_id:
-          type: string
-        default_project_id:
-          type: string
-        description:
-          type: string
-        password_expires_at:
-          type: string
-          format: date-time
     Token:
       type: object
       properties:
@@ -178,6 +157,27 @@ components:
             issued_at:
               type: string
               format: date-time
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        enabled:
+          type: boolean
+        domain_id:
+          type: string
+        default_project_id:
+          type: string
+        description:
+          type: string
+        password_expires_at:
+          type: string
+          format: date-time
   securitySchemes:
     TokenAuth:
       type: apiKey
