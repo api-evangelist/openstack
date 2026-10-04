@@ -1,0 +1,81 @@
+slug: openstack
+provider: OpenStack
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Roles
+  spec_file: openstack-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: GET /role_assignments  listRoleAssignments  List role assignments
+  reason: Role and role-assignment administration in an identity service is plainly identity and access
+    management.
+- tag: Servers
+  spec_file: openstack-servers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: Nova is the OpenStack Compute service that manages the lifecycle of compute instances (virtual
+    machines, bare-metal, containers)
+  reason: Create/update/delete of compute instances is compute infrastructure provisioning and management;
+    'Servers' here is a VM, not a business entity.
+- tag: Users
+  spec_file: openstack-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: '"Keystone is the OpenStack Identity service that provides authentication, authorization,
+    and a service catalog"; operations "Create user", "Update user", "Delete user"'
+  reason: CRUD over identity-service user accounts in the cloud identity provider (Keystone) — this is
+    identity and access administration, not HR employee records.
+- tag: Tokens
+  spec_file: openstack-tokens-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /auth/tokens  issueToken  Issue an authentication token
+  reason: Issuing, validating and revoking authentication tokens is the core function of the Identity
+    service; for this vendor authentication is the delivered capability (IAM), not incidental plumbing.
+- tag: Domains
+  spec_file: openstack-domains-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: Keystone is the OpenStack Identity service that provides authentication, authorization...
+    endpoints for tokens, users, groups, projects, domains, roles
+  reason: Keystone domains are identity namespaces grouping users/projects for authorization scoping;
+    operations create and list them, which is identity and access administration, not a business-domain
+    concept.
+- tag: Flavors
+  spec_file: openstack-flavors-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /flavors/detail  listFlavorsDetail  List flavors (detailed)
+  reason: Nova flavors are compute instance size definitions (vCPU/RAM) used when provisioning VMs — compute/cloud
+    infrastructure management.
+- tag: Server Actions
+  spec_file: openstack-server-actions-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: server actions such as start, stop, reboot, resize, rebuild, and snapshot
+  reason: Lifecycle actions on compute instances are day-to-day cloud compute infrastructure operations.

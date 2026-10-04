@@ -536,6 +536,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/json-schema/openstack-server-schema.json
 common:
+  - type: CapabilityMap
+    url: capabilities/openstack-capability-edges.yml
+    name: OpenStack Business Capability Map
   - type: AgenticAccess
     url: agentic-access/openstack-agentic-access.yml
   - type: DomainSecurity
