@@ -1,0 +1,332 @@
+# OpenStack (openstack)
+
+<!-- API-EVANGELIST-PROVENANCE:BEGIN -->
+> ### About this repository
+>
+> **This is not our API.** This repository is an independent, third-party profile of a company's
+> **publicly available** API surface, maintained by [API Evangelist](https://apievangelist.com).
+> API Evangelist does not operate, host, resell, or support this company's APIs, and is not
+> affiliated with or endorsed by the company unless stated on the profile.
+>
+> **Where the information came from.** Everything here is assembled from material a member of the
+> public can reach with a browser and no credentials — the company's own website, developer portal
+> and documentation, the specifications it publishes for public use (OpenAPI, AsyncAPI, JSON Schema,
+> `apis.json`, `llms.txt` and similar), its public repositories, and its public status, pricing and
+> changelog pages. **Nothing here is obtained by breaching a system, defeating an access control, or
+> using credentials of any kind.**
+>
+> **The rating is an independent assessment.** The Kin Score and Agent Readiness rating are
+> independently calculated scores of a company's *public* API artifacts, produced by API Evangelist
+> against a published rubric. They are not certifications, endorsements, security assessments, or
+> audits, and they score published artifacts — not the quality, safety, or security of the software.
+>
+> **Corrections, re-scores, and removal are free.** No partnership, contract, or purchase is
+> required, and you do not need to justify the request.
+>
+> - **Something wrong?** Open an issue on this repository, or email
+>   [info@apievangelist.com](mailto:info@apievangelist.com).
+> - **Published something new?** Ask for a re-score and we will re-run the rating.
+> - **Want the listing taken down?** Say so and we will honor it. The profile is reduced to your
+>   company name, a factual description, and a link to your own site, and the company is recorded as
+>   **unrated** — never scored zero for having asked.
+>
+> **Response times.** Acknowledgement within **one business day**; removal or restriction within
+> **two business days**; corrections and re-scores within **five business days**.
+>
+> **Not from the company, and here with a question?** You are welcome here — we would rather be the
+> front line and point you the right way than have a good report go nowhere. What this repository
+> can answer is narrow, though, so it is worth knowing who you are actually looking for:
+>
+> - **A question about how the API works, an account, billing, or a bug in the service** — that is
+>   the company's own support, not us. We profile this API; we do not operate it and cannot see
+>   your account.
+> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
+>   This has happened with a real and correct bug report that reached us instead of the people who
+>   could fix it, which helped nobody.
+> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
+>   wrong artifact — is ours. Open an issue here.
+> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
+>   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
+>
+> **This repository contains no software, and we will never ask you to download anything.** There is
+> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
+> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
+> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
+> link; it is a lure. Report it to GitHub and, if you like, tell us at
+> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
+>
+> **On a security or compliance team?** Email
+> [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
+> you will get a person, not a form. We will tell you exactly which public URLs this profile was
+> built from so your team can see the same surface we did, and we will take the listing down on
+> request while you work through it.
+>
+> Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
+<!-- API-EVANGELIST-PROVENANCE:END -->
+
+Open source cloud computing platform for building and managing public and private clouds, providing infrastructure as a service (IaaS) through a set of interrelated services including Compute (Nova), Object Storage (Swift), Block Storage (Cinder), Networking (Neutron), Identity (Keystone), Image (Glance), Orchestration (Heat), Database (Trove), DNS (Designate), and Load Balancer (Octavia). Each service exposes its own REST API; clients authenticate against Keystone and use the returned service catalog to discover per-region endpoints for the remaining services.
+
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
+
+## Tags
+
+- Cloud Platform
+- Infrastructure as a Service
+- Open Source
+- Virtualization
+- Linux Foundation
+
+## Timestamps
+
+- **Created:** 2025-01-01
+- **Modified:** 2026-05-19
+
+## APIs
+
+### OpenStack Identity (Keystone) API
+
+Keystone is the OpenStack Identity service that provides authentication, authorization, and a service catalog for an OpenStack cloud. Tokens issued by Keystone are required to call any other OpenStack service API. The v3 API exposes endpoints for tokens, users, groups, projects, domains, roles, role assignments, services, endpoints, and the service catalog.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/identity/v3/](https://docs.openstack.org/api-ref/identity/v3/)
+- **Base URL:** `https://{keystone-host}:5000/v3`
+
+#### Tags
+
+- Identity
+- Authentication
+- Authorization
+- Service Catalog
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/identity/v3/)
+- [Documentation](https://docs.openstack.org/keystone/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/openapi/openstack-keystone-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/json-ld/openstack-context.jsonld)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Compute (Nova) API
+
+Nova is the OpenStack Compute service that manages the lifecycle of compute instances (virtual machines, bare-metal, containers). The API exposes endpoints for servers, flavors, images, key pairs, security groups, attached volumes, and lifecycle actions such as start, stop, reboot, resize, rebuild, and snapshot.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/compute/](https://docs.openstack.org/api-ref/compute/)
+- **Base URL:** `https://{nova-host}/compute/v2.1`
+
+#### Tags
+
+- Compute
+- Virtual Machines
+- Bare Metal
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/compute/)
+- [Documentation](https://docs.openstack.org/nova/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/openapi/openstack-nova-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/json-schema/openstack-server-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/openstack/refs/heads/main/json-ld/openstack-context.jsonld)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Networking (Neutron) API
+
+Neutron provides networking as a service, exposing endpoints for networks, subnets, ports, routers, floating IPs, security groups, load balancers, firewalls, and VPN-as-a-Service.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/network/](https://docs.openstack.org/api-ref/network/)
+- **Base URL:** `https://{neutron-host}/networking/v2.0`
+
+#### Tags
+
+- Networking
+- SDN
+- Security Groups
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/network/)
+- [Documentation](https://docs.openstack.org/neutron/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Block Storage (Cinder) API
+
+Cinder provides persistent block-level storage volumes that can be attached to Nova instances. The v3 API exposes endpoints for volumes, snapshots, backups, volume types, attachments, transfers, and quotas.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/block-storage/](https://docs.openstack.org/api-ref/block-storage/)
+- **Base URL:** `https://{cinder-host}/volume/v3`
+
+#### Tags
+
+- Block Storage
+- Volumes
+- Snapshots
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/block-storage/)
+- [Documentation](https://docs.openstack.org/cinder/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Object Storage (Swift) API
+
+Swift is the OpenStack object storage service. The API exposes endpoints for accounts, containers, and objects with eventual- consistency replication, large-object support, and configurable access controls.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/object-store/](https://docs.openstack.org/api-ref/object-store/)
+- **Base URL:** `https://{swift-host}/v1/AUTH_{tenant_id}`
+
+#### Tags
+
+- Object Storage
+- Containers
+- Replication
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/object-store/)
+- [Documentation](https://docs.openstack.org/swift/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Image (Glance) API
+
+Glance manages disk and server images. The v2 API exposes endpoints for images, image members, image tags, image data upload/download, tasks, schemas, and metadata definitions.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/image/](https://docs.openstack.org/api-ref/image/)
+- **Base URL:** `https://{glance-host}/image/v2`
+
+#### Tags
+
+- Images
+- Disk Images
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/image/)
+- [Documentation](https://docs.openstack.org/glance/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Orchestration (Heat) API
+
+Heat is the OpenStack orchestration service that manages infrastructure-as-code deployments via HOT (Heat Orchestration Template) and AWS CloudFormation-compatible templates. The API exposes endpoints for stacks, resources, events, software configs, and template validation.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/orchestration/](https://docs.openstack.org/api-ref/orchestration/)
+- **Base URL:** `https://{heat-host}/heat-api/v1`
+
+#### Tags
+
+- Orchestration
+- Infrastructure as Code
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/orchestration/)
+- [Documentation](https://docs.openstack.org/heat/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Load Balancer (Octavia) API
+
+Octavia provides Load Balancing as a Service. The v2 API exposes endpoints for load balancers, listeners, pools, members, health monitors, L7 policies and rules, and TLS containers.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/load-balancer/](https://docs.openstack.org/api-ref/load-balancer/)
+- **Base URL:** `https://{octavia-host}/load-balancer/v2`
+
+#### Tags
+
+- Load Balancer
+- LBaaS
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/load-balancer/)
+- [Documentation](https://docs.openstack.org/octavia/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack DNS (Designate) API
+
+Designate is the OpenStack DNS-as-a-Service. The v2 API exposes endpoints for zones, recordsets, pools, transfers, and TSIG keys.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/dns/](https://docs.openstack.org/api-ref/dns/)
+- **Base URL:** `https://{designate-host}/dns/v2`
+
+#### Tags
+
+- DNS
+- DNSaaS
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/dns/)
+- [Documentation](https://docs.openstack.org/designate/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### OpenStack Database (Trove) API
+
+Trove is the OpenStack Database-as-a-Service that provisions and manages database instances (MySQL, PostgreSQL, MongoDB, Redis, MariaDB, Cassandra, etc.) on top of OpenStack.
+
+- **Human URL:** [https://docs.openstack.org/api-ref/database/](https://docs.openstack.org/api-ref/database/)
+- **Base URL:** `https://{trove-host}/database/v1.0`
+
+#### Tags
+
+- Database
+- DBaaS
+
+#### Properties
+
+- [Documentation](https://docs.openstack.org/api-ref/database/)
+- [Documentation](https://docs.openstack.org/trove/)
+- [Postman Collection](collections/openstack-keystone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-keystone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/openstack-nova.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openstack-nova.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [LinkedIn](https://www.linkedin.com/company/openstack)
+- [Website](https://www.openstack.org/)
+- [Portal](https://docs.openstack.org/)
+- [Documentation](https://docs.openstack.org/api-ref/)
+- [Getting Started](https://docs.openstack.org/api-quick-start/)
+- [Community](https://www.openstack.org/community/)
+- [Blog](https://www.openstack.org/blog/)
+- [GitHub Organization](https://github.com/openstack)
+- [Source Code](https://opendev.org/openstack)
+- [Terms of Service](https://www.openstack.org/legal/)
+- [License](https://www.apache.org/licenses/LICENSE-2.0)
+- [Organization](https://www.openstack.org/foundation/)
+- [Integrations](https://www.openstack.org/marketplace)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
